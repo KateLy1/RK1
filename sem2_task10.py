@@ -1,3 +1,7 @@
+#Написать функцию, которая принимает на вход два отсортированных односвязных списка и объединяет их в один отсортированный список. 
+#При этом затраты по памяти должны быть O(1)
+
+
 class Node:
     def __init__(self, data = None, next_node = None):
         self.data = data
@@ -18,16 +22,13 @@ def merge_sorted_lists(head1, head2):
         return head2
     if head2 == None:
         return head1
-
     if head1.data <= head2.data:
         head = head1
         head1 = head1.next
     else:
         head = head2
         head2 = head2.next
-
     current = head
-
     while head1 != None and head2 != None:
         if head1.data <= head2.data:
             current.next = head1
@@ -36,88 +37,63 @@ def merge_sorted_lists(head1, head2):
             current.next = head2
             head2 = head2.next
         current = current.next
-
     if head1:
         current.next = head1
     elif head2:
         current.next = head2
-
     return head
 
-# Создаем несколько отсортированных списков для тестов
-def create_linked_list(data_list):
-    if not data_list:
-        return None
-    head = Node(data_list[0])
+import unittest
+def linked_list_to_list(head):
+    result = []
     current = head
-    for data in data_list[1:]:
-        current.next = Node(data)
+    while current:
+        result.append(current.data)
         current = current.next
-    return head
+    return result
 
-# Пример 1
-list1 = create_linked_list([1, 3, 5, 7])
-list2 = create_linked_list([2, 4, 6, 8])
-merged_list = merge_sorted_lists(list1, list2)
+class TestMergeSortedLists(unittest.TestCase):
 
-# Выводим объединенный список (для проверки)
-current = merged_list
-result_list = []
-while current:
-    result_list.append(current.data)
-    current = current.next
-print(result_list)  # Ожидаемый вывод: [1, 2, 3, 4, 5, 6, 7, 8]
+    def test1(self):
+        self.assertIsNone(merge_sorted_lists(None, None))
 
+    def test2(self):
+        node1 = Node(1)
+        node2 = Node(2)
+        node1.next = node2
+        
+        result_head = merge_sorted_lists(node1, None)
+        self.assertEqual(linked_list_to_list(result_head), [1, 2])
 
-# Пример 2: один список пустой
-list3 = create_linked_list([10, 20, 30])
-list4 = None
-merged_list2 = merge_sorted_lists(list3, list4)
-
-current = merged_list2
-result_list = []
-while current:
-    result_list.append(current.data)
-    current = current.next
-print(result_list)  # Ожидаемый вывод: [10, 20, 30]
-
-# Пример 3:  Оба списка пустые
-list5 = None
-list6 = None
-merged_list3 = merge_sorted_lists(list5, list6)
-
-current = merged_list3
-if current is None:
-    print("None") # Ожидаемый вывод: None
-else:
-  result_list = []
-  while current:
-      result_list.append(current.data)
-      current = current.next
-  print(result_list)
+        result_head = merge_sorted_lists(None, node1)
+        self.assertEqual(linked_list_to_list(result_head), [1, 2])
 
 
-# Пример 4: один список содержит только одно значение
-list7 = create_linked_list([5])
-list8 = create_linked_list([1, 2, 3, 4, 6, 7])
-merged_list4 = merge_sorted_lists(list7, list8)
+    def test3(self):
+        node1 = Node(1)
+        node2 = Node(3)
+        node1.next = node2
 
-current = merged_list4
-result_list = []
-while current:
-    result_list.append(current.data)
-    current = current.next
-print(result_list) # Ожидаемый вывод: [1, 2, 3, 4, 5, 6, 7]
+        node3 = Node(2)
+        node4 = Node(4)
+        node3.next = node4
+
+        result_head = merge_sorted_lists(node1, node3)
+        self.assertEqual(linked_list_to_list(result_head), [1, 2, 3, 4])
+
+    def test4(self):
+        node1 = Node(1)
+        node2 = Node(4)
+        node1.next = node2
+
+        node3 = Node(2)
+        node4 = Node(3)
+        node3.next = node4
+
+        result_head = merge_sorted_lists(node1, node3)
+        self.assertEqual(linked_list_to_list(result_head), [1, 2, 3, 4])
+        
+if __name__ == '__main__':
+    unittest.main(argv=['first-arg-is-ignored'], exit=False)
 
 
-# Пример 5: оба списка содержат одно и то же значение, по одному разу
-list9 = create_linked_list([5])
-list10 = create_linked_list([5])
-merged_list5 = merge_sorted_lists(list9, list10)
-
-current = merged_list5
-result_list = []
-while current:
-    result_list.append(current.data)
-    current = current.next
-print(result_list)  # Ожидаемый вывод: [5, 5]

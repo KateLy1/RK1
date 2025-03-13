@@ -2,24 +2,21 @@
 #Необходимо повернуть (сдвинуть) справа налево часть массива, которая указана вторым параметром.
 #Сделать это надо за линейное время без дополнительных аллокаций
 
-def reverseArray(array):
-    left = 0
-    right = len(array) - 1
+def reverseArray(array, left, right):
     while(left<right):
         array[left], array[right] = array[right], array[left]
         left += 1
         right -= 1
-    return array
 
 def solution(array, k):
     n = len(array)
-    reverseArray(array[0:n])
-    reverseArray(array[0:(k % n)])
-    reverseArray(array[(k % n):n])
+    reverseArray(array, 0, n-1)
+    reverseArray(array, 0 ,(k % n)-1)
+    reverseArray(array, (k % n),(n-1))
     return array
-print(solution(a, k))
 
-class TestGrades(unittest.TestCase):
+import unittest
+class TestSolution(unittest.TestCase):
 
     def test1(self):
         self.assertEqual(solution([1, 2, 3, 4, 5], 2), [4, 5, 1, 2, 3])

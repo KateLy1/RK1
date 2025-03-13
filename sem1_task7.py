@@ -11,4 +11,4 @@ def sort_binary_array(arr):
             left += 1
             right -= 1
     return arr
-  print(sort_binary_array(a))
+print(sort_binary_array(a))

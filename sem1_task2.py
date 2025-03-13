@@ -17,22 +17,22 @@ import unittest
 
 class TestTwoSumSorted(unittest.TestCase):
 
-    def test_empty_array(self):         #Пустой массив
+    def test1(self):         #Пустой массив
         self.assertIsNone(twoSum([], 10))
 
-    def test_no_solution(self):         #Нет пары
+    def test2(self):         #Нет пары
         self.assertIsNone(twoSum([2, 7, 11, 15], 5))
 
-    def test_basic_case(self):         #Простой случай
+    def test3(self):         #Простой случай
         self.assertEqual(twoSum([2, 7, 11, 15], 9), [0, 1])
 
-    def test_duplicate_values(self):    #Дубликаты
+    def test4(self):    #Дубликаты
         self.assertEqual(twoSum([2, 7, 7, 15], 14), [1, 2])
 
-    def test_negative_numbers(self):    #Отрицательные числа
+    def test5(self):    #Отрицательные числа
         self.assertEqual(twoSum([-3, 0, 2, 7], 4), [0, 3])
 
-    def test_target_is_negative(self):  #Таргет меньше 0
+    def test6(self):  #Таргет меньше 0
         self.assertEqual(twoSum([-5, -3, 0, 2, 7], -8), [0, 1])
         
 if __name__ == '__main__':

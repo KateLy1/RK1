@@ -1,3 +1,4 @@
+#Является ли строка палиндромом с помощью дека
 class Node:
     def __init__(self, data = None):
         self.data = data
@@ -48,7 +49,7 @@ class deque():
         self.size -= 1
         return pop_result.data
 
-  def is_palindrome_deque(text):
+  def isPalindrome(text):
     d = deque()
     for char in text:
         d.push_back(char)
@@ -57,8 +58,23 @@ class deque():
             return False
     return True
 
-print(is_palindrome_deque("madam"))  # True
-print(is_palindrome_deque("racecar"))  # True
-print(is_palindrome_deque("hello"))  # False
-print(is_palindrome_deque("rotor")) # True
-print(is_palindrome_deque("ro")) # False
+import unittest
+class TestIsPalindrome(unittest.TestCase):
+
+    def test1(self):
+        self.assertTrue(isPalindrome(""))
+
+    def test2(self):
+        self.assertTrue(isPalindrome("a"))
+
+    def test3(self):
+        self.assertTrue(isPalindrome("aba"))
+
+    def test4(self):
+        self.assertTrue(isPalindrome("abba"))
+
+    def test5(self):
+        self.assertFalse(isPalindrome("abc"))
+
+if __name__ == '__main__':
+    unittest.main(argv=['first-arg-is-ignored'], exit=False)

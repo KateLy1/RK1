@@ -1,3 +1,5 @@
+#Дан односвязный список. Необходимо проверить, является ли этот список циклическим.
+
 class Node:
     def __init__(self, data = None, next_Node = None):
         self.data = data
@@ -29,17 +31,42 @@ def hasCycle(head):
     return True
 
 
-node1 = Node(10)
-node2 = Node(20)
-node3 = Node(30)
-node4 = Node(1)
-node5 = Node(3)
-node6 = Node(20)
-node1.next_Node = node2
-node2.next_Node = node3
-node3.next_Node = node4
-node4.next_Node = node5
-node5.next_Node = node6
-node6.next_Node = node2
-list_a = Linkedlist(node1)
-print(hasCycle(list_a.head_Node))
+import unittest
+class TestHasCycle(unittest.TestCase):
+
+    def test1(self):
+        self.assertFalse(hasCycle(None))
+
+    def test2(self):
+        node = Node(1)
+        self.assertFalse(hasCycle(node))
+
+    def test3(self):
+        node1 = Node(1)
+        node2 = Node(2)
+        node3 = Node(3)
+        node1.next_Node = node2
+        node2.next_Node = node3
+        self.assertFalse(hasCycle(node1))
+
+    def test4(self):
+        node1 = Node(1)
+        node2 = Node(2)
+        node3 = Node(3)
+        node1.next_Node = node2
+        node2.next_Node = node3
+        node3.next_Node = node1
+        self.assertTrue(hasCycle(node1))
+
+    def test5(self):
+        node1 = Node(1)
+        node2 = Node(2)
+        node3 = Node(3)
+        node1.next_Node = node2
+        node2.next_Node = node3
+        node3.next_Node = node2
+        self.assertTrue(hasCycle(node1))
+
+
+if __name__ == '__main__':
+    unittest.main(argv=['first-arg-is-ignored'], exit=False)

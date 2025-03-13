@@ -1,3 +1,5 @@
+#Является ли слово палиндромом с помощью стека
+
 class Node(object):
     def __init__(self, data):
         self.data = data
@@ -35,5 +37,23 @@ def isPalindrome(s):
             return False
     return True
 
-c = "aba"
-print(isPalindrome(c))
+import unittest
+class TestIsPalindrome(unittest.TestCase):
+
+    def test1(self):
+        self.assertTrue(isPalindrome(""))
+
+    def test2(self):
+        self.assertTrue(isPalindrome("a"))
+
+    def test3(self):
+        self.assertTrue(isPalindrome("aba"))
+
+    def test4(self):
+        self.assertTrue(isPalindrome("abba"))
+
+    def test5(self):
+        self.assertFalse(isPalindrome("abc"))
+
+if __name__ == '__main__':
+    unittest.main(argv=['first-arg-is-ignored'], exit=False)

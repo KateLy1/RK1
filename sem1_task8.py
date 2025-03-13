@@ -13,4 +13,4 @@ def sortColors(nums):
             nums[mid], nums[high] = nums[high], nums[mid]
             high -= 1
     return nums
-  print(sortColors(a))
+print(sortColors(a))
